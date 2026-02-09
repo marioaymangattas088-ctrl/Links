@@ -1,0 +1,1179 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MF Wellness Store | متجر العافية</title>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #1a5f4a;
+            --secondary: #d4af37;
+            --accent: #c0392b;
+            --dark: #0f2027;
+            --light: #f8f9fa;
+            --gradient: linear-gradient(135deg, #1a5f4a 0%, #2c3e50 100%);
+        }
+
+        body {
+            font-family: 'Tajawal', sans-serif;
+            background: var(--dark);
+            color: var(--light);
+            overflow-x: hidden;
+        }
+
+        /* Animation Keyframes */
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(50px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        @keyframes shimmer {
+            0% { background-position: -1000px 0; }
+            100% { background-position: 1000px 0; }
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(15, 32, 39, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 1rem 5%;
+            border-bottom: 2px solid var(--secondary);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: 900;
+            background: linear-gradient(45deg, var(--secondary), #fff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo i {
+            color: var(--secondary);
+            font-size: 2.5rem;
+            -webkit-text-fill-color: var(--secondary);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--light);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            position: relative;
+            padding: 0.5rem 1rem;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 0;
+            height: 2px;
+            background: var(--secondary);
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-links a:hover {
+            color: var(--secondary);
+            transform: translateY(-2px);
+        }
+
+        .cart-icon {
+            position: relative;
+            cursor: pointer;
+            font-size: 1.5rem;
+            color: var(--secondary);
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            background: var(--accent);
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        /* Hero Section */
+        .hero {
+            margin-top: 80px;
+            min-height: 100vh;
+            background: linear-gradient(rgba(15, 32, 39, 0.8), rgba(32, 58, 67, 0.8)), url('https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(212, 175, 55, 0.1) 0%, transparent 70%);
+            animation: rotate 20s linear infinite;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 900px;
+            padding: 2rem;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            animation: fadeInUp 1s ease;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .hero h1 span {
+            color: var(--secondary);
+            display: block;
+            font-size: 5rem;
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            animation: fadeInUp 1s ease 0.3s both;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            animation: fadeInUp 1s ease 0.6s both;
+        }
+
+        .btn {
+            padding: 1rem 2.5rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .btn-primary {
+            background: var(--gradient);
+            color: white;
+            box-shadow: 0 10px 30px rgba(26, 95, 74, 0.4);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--secondary);
+            border: 2px solid var(--secondary);
+        }
+
+        .btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(212, 175, 55, 0.3);
+        }
+
+        /* Ramadan Banner */
+        .ramadan-banner {
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            padding: 1rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .ramadan-banner::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            animation: shimmer 3s infinite;
+        }
+
+        .ramadan-banner p {
+            font-size: 1.3rem;
+            font-weight: 700;
+            position: relative;
+            z-index: 2;
+        }
+
+        .ramadan-banner i {
+            margin: 0 10px;
+            animation: pulse 2s infinite;
+        }
+
+        /* Sections General */
+        section {
+            padding: 5rem 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            position: relative;
+            display: inline-block;
+            width: 100%;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background: var(--secondary);
+            margin: 1rem auto;
+            border-radius: 2px;
+        }
+
+        /* Services Grid */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .service-card {
+            background: linear-gradient(145deg, #1e3c52, #0f2027);
+            border-radius: 20px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.4s;
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent, rgba(212, 175, 55, 0.1), transparent);
+            transform: translateX(-100%);
+            transition: 0.5s;
+        }
+
+        .service-card:hover::before {
+            transform: translateX(100%);
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            border-color: var(--secondary);
+        }
+
+        .service-icon {
+            font-size: 3.5rem;
+            color: var(--secondary);
+            margin-bottom: 1rem;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .service-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--secondary);
+        }
+
+        .service-card p {
+            line-height: 1.8;
+            opacity: 0.9;
+        }
+
+        /* Store Section */
+        .store-section {
+            background: linear-gradient(to bottom, var(--dark), #1a1a2e);
+            border-radius: 30px;
+            padding: 3rem;
+            margin: 3rem 0;
+            border: 2px solid rgba(212, 175, 55, 0.3);
+        }
+
+        .store-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .store-header h2 {
+            font-size: 2.5rem;
+            color: var(--secondary);
+            margin-bottom: 1rem;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .product-card {
+            background: linear-gradient(145deg, #16213e, #0f3460);
+            border-radius: 20px;
+            overflow: hidden;
+            transition: all 0.4s;
+            position: relative;
+            border: 1px solid rgba(212, 175, 55, 0.2);
+        }
+
+        .product-card:hover {
+            transform: scale(1.03);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.4);
+        }
+
+        .discount-badge {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: var(--accent);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            font-weight: 800;
+            font-size: 1.1rem;
+            z-index: 10;
+            animation: pulse 2s infinite;
+            box-shadow: 0 5px 15px rgba(192, 57, 43, 0.4);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            background: linear-gradient(45deg, #1a5f4a, #2c3e50);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            color: var(--secondary);
+        }
+
+        .product-info {
+            padding: 1.5rem;
+        }
+
+        .product-info h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: var(--light);
+        }
+
+        .product-description {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+
+        .price-container {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .original-price {
+            text-decoration: line-through;
+            opacity: 0.6;
+            font-size: 1rem;
+        }
+
+        .current-price {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--secondary);
+        }
+
+        .add-to-cart {
+            width: 100%;
+            padding: 1rem;
+            background: var(--gradient);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .add-to-cart:hover {
+            background: var(--secondary);
+            color: var(--dark);
+            transform: scale(1.02);
+        }
+
+        /* Programs Section */
+        .programs-section {
+            margin: 4rem 0;
+        }
+
+        .program-card {
+            background: linear-gradient(135deg, #1e3c52 0%, #2c5364 100%);
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 2rem;
+            align-items: center;
+            border: 2px solid var(--secondary);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .program-card::before {
+            content: '🏆';
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            font-size: 3rem;
+            opacity: 0.2;
+        }
+
+        .program-icon {
+            font-size: 5rem;
+            text-align: center;
+            color: var(--secondary);
+        }
+
+        .program-content h3 {
+            font-size: 1.8rem;
+            color: var(--secondary);
+            margin-bottom: 1rem;
+        }
+
+        .program-content p {
+            line-height: 1.8;
+            margin-bottom: 1rem;
+        }
+
+        .program-features {
+            list-style: none;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0.5rem;
+        }
+
+        .program-features li {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .program-features li::before {
+            content: '✓';
+            color: var(--secondary);
+            font-weight: bold;
+        }
+
+        /* Contact Section */
+        .contact-section {
+            background: linear-gradient(145deg, #1a5f4a, #0f2027);
+            border-radius: 30px;
+            padding: 4rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contact-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(212, 175, 55, 0.1) 0%, transparent 70%);
+        }
+
+        .contact-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .contact-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .contact-methods {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
+
+        .contact-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+            padding: 2rem;
+            background: rgba(255,255,255,0.1);
+            border-radius: 20px;
+            min-width: 250px;
+            transition: all 0.3s;
+            border: 1px solid rgba(212, 175, 55, 0.3);
+        }
+
+        .contact-item:hover {
+            transform: translateY(-10px);
+            background: rgba(255,255,255,0.15);
+            border-color: var(--secondary);
+        }
+
+        .contact-item i {
+            font-size: 3rem;
+            color: var(--secondary);
+        }
+
+        .contact-item span {
+            font-size: 1.3rem;
+            font-weight: 700;
+        }
+
+        /* Footer */
+        footer {
+            background: #0a0a0a;
+            padding: 3rem 5%;
+            text-align: center;
+            border-top: 2px solid var(--secondary);
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .social-links a {
+            width: 50px;
+            height: 50px;
+            background: var(--gradient);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            transition: all 0.3s;
+            text-decoration: none;
+        }
+
+        .social-links a:hover {
+            transform: rotate(360deg) scale(1.1);
+            background: var(--secondary);
+            color: var(--dark);
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-content {
+            background: linear-gradient(145deg, #1e3c52, #0f2027);
+            padding: 3rem;
+            border-radius: 20px;
+            max-width: 500px;
+            width: 90%;
+            text-align: center;
+            border: 2px solid var(--secondary);
+            position: relative;
+            animation: slideIn 0.3s ease;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 2rem;
+            cursor: pointer;
+            color: var(--secondary);
+        }
+
+        .modal h3 {
+            color: var(--secondary);
+            margin-bottom: 1rem;
+            font-size: 1.8rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.5rem; }
+            .hero h1 span { font-size: 3rem; }
+            .nav-links { display: none; }
+            .program-card { grid-template-columns: 1fr; text-align: center; }
+            .contact-methods { flex-direction: column; align-items: center; }
+            .store-section { padding: 1.5rem; }
+        }
+
+        /* Scroll Animation */
+        .scroll-reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s;
+        }
+
+        .scroll-reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <div class="logo">
+                <i class="fas fa-heartbeat"></i>
+                <span>MF Wellness Store</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#home">الرئيسية</a></li>
+                <li><a href="#services">خدماتنا</a></li>
+                <li><a href="#store">المتجر</a></li>
+                <li><a href="#programs">البرامج</a></li>
+                <li><a href="#contact">تواصل معنا</a></li>
+            </ul>
+            <div class="cart-icon" onclick="openCart()">
+                <i class="fas fa-shopping-cart"></i>
+                <span class="cart-count" id="cartCount">0</span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>مرحباً بك في <span>MF Wellness Store</span></h1>
+            <p>وجهتك الأولى للتأهيل الرياضي، التغذية العلمية، والحجامة العلاجية بأعلى معايير الجودة</p>
+            <div class="cta-buttons">
+                <a href="#store" class="btn btn-primary">
+                    <i class="fas fa-shopping-bag"></i>
+                    تسوق الآن
+                </a>
+                <a href="#contact" class="btn btn-secondary">
+                    <i class="fas fa-phone"></i>
+                    احجز جلستك
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Ramadan Banner -->
+    <div class="ramadan-banner">
+        <p>
+            <i class="fas fa-moon"></i>
+            🌙 خصم 40% على جميع الخدمات حتى نهاية شهر رمضان المبارك 🌙
+            <i class="fas fa-moon"></i>
+        </p>
+    </div>
+
+    <!-- Services Section -->
+    <section id="services" class="scroll-reveal">
+        <h2 class="section-title">خدماتنا المتخصصة</h2>
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fas fa-user-md"></i>
+                </div>
+                <h3>التأهيل الرياضي</h3>
+                <p>برامج تأهيل متخصصة للإصابات الرياضية بإشراف خبراء معتمدين، نستخدم أحدث التقنيات العلاجية لضمان عودتك للنشاط بقوة وأمان</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fas fa-apple-alt"></i>
+                </div>
+                <h3>التغذية الرياضية</h3>
+                <p>خطط غذائية مخصصة حسب أهدافك الرياضية، سواء كنت تبحث عن بناء العضلات، خسارة الوزن، أو تحسين الأداء الرياضي</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fas fa-spa"></i>
+                </div>
+                <h3>الحجامة العلاجية</h3>
+                <p>جلسات حجامة احترافية وفق السنة النبوية، تساعد في تحسين الدورة الدموية وتخفيف الآلام العضلية والتوتر</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fas fa-hands"></i>
+                </div>
+                <h3>التدليك العلاجي</h3>
+                <p>جلسات تدليك متنوعة تشمل التدليك الرياضي، العلاجي، والاسترخائي لتخفيف التوتر وتحسين مرونة العضلات</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Store Section -->
+    <section id="store" class="store-section scroll-reveal">
+        <div class="store-header">
+            <h2><i class="fas fa-store"></i> متجر MF Wellness</h2>
+            <p>اختر من مجموعتنا المتميزة من البرامج والجلسات العلاجية</p>
+        </div>
+
+        <div class="products-grid">
+            <!-- Product 1: Mario Rehab -->
+            <div class="product-card">
+                <span class="discount-badge">خصم 40%</span>
+                <div class="product-image">
+                    <i class="fas fa-file-medical-alt"></i>
+                </div>
+                <div class="product-info">
+                    <h3>برنامج Mario Rehab</h3>
+                    <p class="product-description">برنامج شامل للتأهيل الرياضي يشمل تقييم الإصابة، خطة علاجية مخصصة، ومتابعة دورية حتى التعافي الكامل</p>
+                    <div class="price-container">
+                        <span class="original-price">السعر الأصلي: غير محدد</span>
+                    </div>
+                    <button class="add-to-cart" onclick="addToCart('Mario Rehab', 'contact')">
+                        <i class="fas fa-phone"></i>
+                        تواصل للحجز
+                    </button>
+                </div>
+            </div>
+
+            <!-- Product 2: Mario Nutrition -->
+            <div class="product-card">
+                <span class="discount-badge">عرض رمضان</span>
+                <div class="product-image">
+                    <i class="fas fa-utensils"></i>
+                </div>
+                <div class="product-info">
+                    <h3>برنامج Mario Nutrition</h3>
+                    <p class="product-description">نظام غذائي كامل مخصص للرياضيين، يشمل حساب السعرات، توزيع العناصر الغذائية، ومتابعة أسبوعية</p>
+                    <div class="price-container">
+                        <span class="original-price">700 جنيه</span>
+                        <span class="current-price">400 جنيه</span>
+                    </div>
+                    <button class="add-to-cart" onclick="addToCart('Mario Nutrition', 400)">
+                        <i class="fas fa-cart-plus"></i>
+                        أضف للسلة
+                    </button>
+                </div>
+            </div>
+
+            <!-- Product 3: Hijama -->
+            <div class="product-card">
+                <span class="discount-badge">عرض رمضان</span>
+                <div class="product-image">
+                    <i class="fas fa-moon"></i>
+                </div>
+                <div class="product-info">
+                    <h3>جلسة الحجامة</h3>
+                    <p class="product-description">جلسة حجامة كاملة تشمل التشاور الطبي، اختيار النقاط المناسبة، والمتابعة بعد الجلسة</p>
+                    <div class="price-container">
+                        <span class="original-price">650 جنيه</span>
+                        <span class="current-price">400 جنيه</span>
+                    </div>
+                    <button class="add-to-cart" onclick="addToCart('جلسة الحجامة', 400)">
+                        <i class="fas fa-cart-plus"></i>
+                        أضف للسلة
+                    </button>
+                </div>
+            </div>
+
+            <!-- Product 4: Massage -->
+            <div class="product-card">
+                <span class="discount-badge">عرض رمضان</span>
+                <div class="product-image">
+                    <i class="fas fa-spa"></i>
+                </div>
+                <div class="product-info">
+                    <h3>جلسة التدليك</h3>
+                    <p class="product-description">جلسة تدليك احترافية (رياضي - علاجي - استرخائي) لمدة 60 دقيقة مع زيوت طبيعية مخصصة</p>
+                    <div class="price-container">
+                        <span class="original-price">800 جنيه</span>
+                        <span class="current-price">500 جنيه</span>
+                    </div>
+                    <button class="add-to-cart" onclick="addToCart('جلسة التدليك', 500)">
+                        <i class="fas fa-cart-plus"></i>
+                        أضف للسلة
+                    </button>
+                </div>
+            </div>
+
+            <!-- Product 5: Diet System -->
+            <div class="product-card">
+                <span class="discount-badge">خصم 40%</span>
+                <div class="product-image">
+                    <i class="fas fa-clipboard-list"></i>
+                </div>
+                <div class="product-info">
+                    <h3>نظام غذائي مخصص</h3>
+                    <p class="product-description">خطة غذائية مفصلة لمدة شهر كامل مع جدول وجبات يومي وبدائل متنوعة تناسب نمط حياتك</p>
+                    <div class="price-container">
+                        <span class="current-price">تواصل للتفاصيل</span>
+                    </div>
+                    <button class="add-to-cart" onclick="addToCart('نظام غذائي', 'contact')">
+                        <i class="fas fa-phone"></i>
+                        استفسر الآن
+                    </button>
+                </div>
+            </div>
+
+            <!-- Product 6: Rehabilitation -->
+            <div class="product-card">
+                <span class="discount-badge">خصم 40%</span>
+                <div class="product-image">
+                    <i class="fas fa-heartbeat"></i>
+                </div>
+                <div class="product-info">
+                    <h3>جلسة التأهيل</h3>
+                    <p class="product-description">جلسة تأهيلية متخصصة حسب نوع الإصابة، تشمل التقييم، العلاج اليدوي، والتمارين التصحيحية</p>
+                    <div class="price-container">
+                        <span class="current-price">تواصل خاص</span>
+                    </div>
+                    <button class="add-to-cart" onclick="addToCart('جلسة التأهيل', 'contact')">
+                        <i class="fas fa-phone"></i>
+                        احجز جلستك
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Programs Section -->
+    <section id="programs" class="programs-section scroll-reveal">
+        <h2 class="section-title">البرامج المتخصصة</h2>
+        
+        <div class="program-card">
+            <div class="program-icon">
+                <i class="fas fa-dumbbell"></i>
+            </div>
+            <div class="program-content">
+                <h3>برنامج Mario Rehab</h3>
+                <p>برنامج متكامل للتأهيل الرياضي يبدأ بتقييم دقيق للإصابة وينتهي بعودتك للملعب بقوة أكبر. يشمل الجلسات العلاجية، التمارين التأهيلية، والمتابعة المنزلية.</p>
+                <ul class="program-features">
+                    <li>تقييم إصابة شامل</li>
+                    <li>خطة علاجية مخصصة</li>
+                    <li>تمارين تصحيحية</li>
+                    <li>متابعة دورية</li>
+                    <li>نصائح وقائية</li>
+                    <li>دعم مستمر 24/7</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="program-card">
+            <div class="program-icon">
+                <i class="fas fa-carrot"></i>
+            </div>
+            <div class="program-content">
+                <h3>برنامج Mario Nutrition</h3>
+                <p>برنامج غذائي علمي يعتمد على أحدث البحوث الرياضية. نصمم لك نظاماً غذائياً يتناسب مع نوع رياضتك، مستوى نشاطك، وأهدافك الصحية.</p>
+                <ul class="program-features">
+                    <li>حساب دقيق للاحتياجات</li>
+                    <li>جدول وجبات مرن</li>
+                    <li>مكملات غذائية موصى بها</li>
+                    <li>متابعة أسبوعية</li>
+                    <li>تعديلات حسب التقدم</li>
+                    <li>وصفات صحية متنوعة</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact-section scroll-reveal">
+        <div class="contact-content">
+            <h2>احجز جلستك الآن</h2>
+            <p>تواصل معنا مباشرة للحجز أو الاستفسار</p>
+            
+            <div class="contact-methods">
+                <div class="contact-item" onclick="window.open('tel:01550898387')">
+                    <i class="fas fa-phone-alt"></i>
+                    <span>01550898387</span>
+                    <small>اتصل الآن</small>
+                </div>
+                
+                <div class="contact-item" onclick="window.open('mailto:marioaymangattas099@gmail.com')">
+                    <i class="fas fa-envelope"></i>
+                    <span>البريد الإلكتروني</span>
+                    <small>marioaymangattas099@gmail.com</small>
+                </div>
+                
+                <div class="contact-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span>الموقع</span>
+                    <small>نخدمك أينما كنت</small>
+                </div>
+            </div>
+
+            <div style="margin-top: 3rem; padding: 2rem; background: rgba(255,255,255,0.1); border-radius: 20px; border: 2px solid var(--secondary);">
+                <h3 style="color: var(--secondary); margin-bottom: 1rem; font-size: 1.5rem;">🌙 عروض شهر رمضان 🌙</h3>
+                <p style="font-size: 1.2rem; line-height: 2;">
+                    خصم 40% على جميع الخدمات حتى نهاية الشهر الكريم<br>
+                    جلسة الحجامة: <strong>400 جنيه</strong> | جلسة التدليك: <strong>500 جنيه</strong><br>
+                    برنامج التغذية: <strong>400 جنيه</strong> | التأهيل: <strong>تواصل للتفاصيل</strong>
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <h3>MF Wellness Store</h3>
+            <p>شريكك نحو صحة أفضل وأداء رياضي متميز</p>
+            
+            <div class="social-links">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-whatsapp"></i></a>
+                <a href="#"><i class="fab fa-youtube"></i></a>
+            </div>
+            
+            <p style="margin-top: 2rem; opacity: 0.8;">
+                © 2024 MF Wellness Store. جميع الحقوق محفوظة.<br>
+                تصميم وتطوير بأعلى معايير الجودة
+            </p>
+        </div>
+    </footer>
+
+    <!-- Cart Modal -->
+    <div id="cartModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeCart()">&times;</span>
+            <h3><i class="fas fa-shopping-cart"></i> سلة المشتريات</h3>
+            <div id="cartItems" style="margin: 2rem 0; text-align: right;">
+                <p>السلة فارغة</p>
+            </div>
+            <div id="cartTotal" style="font-size: 1.3rem; font-weight: bold; color: var(--secondary); margin-bottom: 1rem;">
+                الإجمالي: 0 جنيه
+            </div>
+            <button class="btn btn-primary" onclick="checkout()" style="width: 100%;">
+                <i class="fas fa-phone"></i>
+                اتصل للحجز: 01550898387
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // Cart functionality
+        let cart = [];
+        
+        function addToCart(name, price) {
+            if (price === 'contact') {
+                window.open('tel:01550898387');
+                return;
+            }
+            
+            cart.push({ name, price });
+            updateCartCount();
+            showNotification(`تم إضافة ${name} إلى السلة`);
+        }
+
+        function updateCartCount() {
+            document.getElementById('cartCount').innerText = cart.length;
+        }
+
+        function openCart() {
+            const modal = document.getElementById('cartModal');
+            const itemsDiv = document.getElementById('cartItems');
+            const totalDiv = document.getElementById('cartTotal');
+            
+            if (cart.length === 0) {
+                itemsDiv.innerHTML = '<p>السلة فارغة</p>';
+                totalDiv.innerHTML = 'الإجمالي: 0 جنيه';
+            } else {
+                let html = '<ul style="list-style: none;">';
+                let total = 0;
+                cart.forEach((item, index) => {
+                    html += `<li style="padding: 0.5rem; border-bottom: 1px solid rgba(255,255,255,0.1);">
+                        ${item.name} - ${item.price} جنيه
+                        <button onclick="removeFromCart(${index})" style="background: none; border: none; color: #e74c3c; cursor: pointer; margin-right: 10px;">حذف</button>
+                    </li>`;
+                    total += item.price;
+                });
+                html += '</ul>';
+                itemsDiv.innerHTML = html;
+                totalDiv.innerHTML = `الإجمالي: ${total} جنيه`;
+            }
+            
+            modal.style.display = 'flex';
+        }
+
+        function removeFromCart(index) {
+            cart.splice(index, 1);
+            updateCartCount();
+            openCart();
+        }
+
+        function closeCart() {
+            document.getElementById('cartModal').style.display = 'none';
+        }
+
+        function checkout() {
+            if (cart.length === 0) {
+                alert('السلة فارغة!');
+                return;
+            }
+            window.open('tel:01550898387');
+        }
+
+        function showNotification(message) {
+            const notif = document.createElement('div');
+            notif.style.cssText = `
+                position: fixed;
+                top: 100px;
+                right: 20px;
+                background: var(--secondary);
+                color: var(--dark);
+                padding: 1rem 2rem;
+                border-radius: 10px;
+                font-weight: bold;
+                z-index: 3000;
+                animation: slideIn 0.3s ease;
+            `;
+            notif.innerText = message;
+            document.body.appendChild(notif);
+            setTimeout(() => notif.remove(), 3000);
+        }
+
+        // Scroll Animation
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: "0px 0px -50px 0px"
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.scroll-reveal').forEach((el) => observer.observe(el));
+
+        // Smooth Scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Close modal on outside click
+        window.onclick = function(event) {
+            const modal = document.getElementById('cartModal');
+            if (event.target == modal) {
+                modal.style.display = 'none';
+            }
+        }
+    </script>
+</body>
+</html>
